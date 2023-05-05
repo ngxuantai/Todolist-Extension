@@ -8,8 +8,11 @@
     <div class="container">
       <h1>Todo List</h1>
       <form id="add-task-form">
-        <input type="text" id="task-input" placeholder="Add a new task..." />
-        <button type="submit">Add</button>
+        <input type="text" id="task-input"  placeholder="Add a new task" autocomplete="off"/>
+        <input type="text" id="discription-input" placeholder="Add a discription"  autocomplete="off"/>
+        <div class="list-button">
+          <button type="submit" id="btn-add">Add</button>
+        </div>
       </form>
       <ul id="task-list"></ul>
     </div>
