@@ -1,115 +1,128 @@
 .container {
-    width: 400px;
-    height: 800px;
-    margin: 20px auto;
-    /* text-align: center; */
-    font-family: Arial, sans-serif;
+  width: 400px;
+  height: 800px;
+  margin: 20px auto;
+  /* text-align: center; */
+  font-family: Arial, sans-serif;
 }
   
 h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: left;
-    padding-left: 1.5rem 0 0 0;
-    /* margin: 4,5rem 1,5rem 1,5rem 1,5rem; */
-    position: relative;
-  }
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: left;
+  padding-left: 1.5rem 0 0 0;
+  /* margin: 4,5rem 1,5rem 1,5rem 1,5rem; */
+  position: relative;
+}
   
-  form {
-    /* display: none; */
-    /* display: flex;
-    flex-direction: column; */
-    background-color: #fff;
-    margin-top: 1rem;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    padding: 0.5rem 0.5rem;
-    border-radius: 10px;
-    position: fixed;
-    top: 0;
-    left: 0.5rem;
-    right: 0.5rem;
-    /* focus */
+form {
+  /* display: none; */
+  /* display: flex;
+  flex-direction: column; */
+  background-color: #fff;
+  margin-top: 1rem;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: 0.5rem 0.5rem;
+  border-radius: 10px;
+  position: fixed;
+  top: 0;
+  left: 0.5rem;
+  right: 0.5rem;
+  /* focus */
 
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-  }
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
   
-  form label {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  form input[type="text"] {
-    margin: 0.2rem 0.2rem;
-    padding: 0.5rem;
-    font-size: 1.2rem;
-    width: 100%;
-    box-sizing: inherit;
-    /* margin-bottom: 0.5rem; */
-    
-    border: none;
-    border-radius: 5px;
-    /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); */
-    outline: none;
-  }
+form label {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
 
-  form input[type="text"]:focus {
-    background-color: #CCFFCC;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-  }
+form input[type="text"] {
+  margin: 0.2rem 0.2rem;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  width: 100%;
+  box-sizing: inherit;
+  /* margin-bottom: 0.5rem; */
+  
+  border: none;
+  border-radius: 5px;
+  /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); */
+  outline: none;
+}
 
-  form #task-input {
-    font-weight: 500;
-  }
+form input[type="text"]:focus {
+  background-color: #CCFFCC;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
 
-  form #discription-input  {
-    font-size: 1.0rem;
-  }
-  
-  form button[type="submit"] {
-    font-size: 1.2rem;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #2196F3;
-    color: white;
-    float:right;
-    cursor: pointer;
-  }
-  
-  ul {
-    list-style: none;
-    margin-top: 2rem;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 300px;
-  }
-  
-  li {
-    font-size: 1.2rem;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-    width: 300px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  li span {
-    margin-right: 1rem;
-  }
-  
-  li button {
-    font-size: 1rem;
-    padding: 0.3rem;
-    border: none;
-    border-radius: 3px;
-    background-color: #f44336;
-    color: white;
-    cursor: pointer;
-  }
+form #task-input {
+  font-weight: 500;
+}
+
+form #discription-input  {
+  font-size: 1.0rem;
+}
+
+form button[type="submit"] {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #2196F3;
+  color: white;
+  float:right;
+  cursor: pointer;
+}
+
+/* form #form-list {
+  display: none;
+} */
+
+.container #form-list {
+  background-color: #fff;
+  margin-top: 1rem;
+  border: 1px solid #ccc;
+  padding: 0.5rem 0.5rem;
+  border-radius: 10px;
+  display: none;
+}
+
+ul {
+  list-style: none;
+  margin-top: 2rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 300px;
+}
+
+li {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li span {
+  margin-right: 1rem;
+}
+
+li button {
+  font-size: 1rem;
+  padding: 0.3rem;
+  border: none;
+  border-radius: 3px;
+  background-color: #f44336;
+  color: white;
+  cursor: pointer;
+}

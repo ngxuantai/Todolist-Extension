@@ -2,53 +2,54 @@ const addTaskForm = document.getElementById("add-task-form");
 const taskInput = document.getElementById("task-input");
 const disInput = document.getElementById("discription-input");
 const taskList = document.getElementById("task-list");
+const formList = document.getElementById("form-list");
 
-let todos = [];
-loadTodos();
+// let todos = [];
+// loadTodos();
 
-function clearAll() { 
-  while (taskList.firstChild != null) {
-    taskList.removeChild(taskList.firstChild);
-  }
-}
+// function clearAll() { 
+//   while (taskList.firstChild != null) {
+//     taskList.removeChild(taskList.firstChild);
+//   }
+// }
 
-function loadTodos() {
-  chrome.storage.sync.get(["todos"], (result) => {
-    if (result.todos) {
-      todos = result.todos;
-      renderTodos();
-    }
-  });
-}
+// function loadTodos() {
+//   chrome.storage.sync.get(["todos"], (result) => {
+//     if (result.todos) {
+//       todos = result.todos;
+//       renderTodos();
+//     }
+//   });
+// }
 
-function renderTodos() {
-    //const todos = JSON.parse(localStorage.getItem("todos")) || [];
+// function renderTodos() {
+//     //const todos = JSON.parse(localStorage.getItem("todos")) || [];
 
-    // Xóa toàn bộ task hiện tại trong taskList
-    while (todos.firstChild != null) {
-        todos.removeChild(todos.firstChild);
-        chrome.storage.sync.remove("todos");
-        console.log("remove");
-    }
+//     // Xóa toàn bộ task hiện tại trong taskList
+//     while (todos.firstChild != null) {
+//         todos.removeChild(todos.firstChild);
+//         chrome.storage.sync.remove("todos");
+//         console.log("remove");
+//     }
   
-    // Hiển thị danh sách các task
-    todos.forEach((todo, index) => {
-      const todoItem = document.createElement("li");
-      todoItem.innerText = todo.text;
-      todoItem.setAttribute("data-id", index);
+//     // Hiển thị danh sách các task
+//     todos.forEach((todo, index) => {
+//       const todoItem = document.createElement("li");
+//       todoItem.innerText = todo.text;
+//       todoItem.setAttribute("data-id", index);
   
-      // Thêm button để xóa task
-      const deleteBtn = document.createElement("button");
-      deleteBtn.innerText = "X";
-      deleteBtn.addEventListener("click", () => {
-        deleteTodo(index);
+//       // Thêm button để xóa task
+//       const deleteBtn = document.createElement("button");
+//       deleteBtn.innerText = "X";
+//       deleteBtn.addEventListener("click", () => {
+//         deleteTodo(index);
 
-      });
-      todoItem.appendChild(deleteBtn);
+//       });
+//       todoItem.appendChild(deleteBtn);
   
-      taskList.appendChild(todoItem);
-    });
-}
+//       taskList.appendChild(todoItem);
+//     });
+// }
 
 function saveTodos() {
   chrome.storage.sync.set({ todos: todos });
@@ -80,18 +81,28 @@ function addTask(event) {
     todos.push(newTodo);
     saveTodos();
     taskInput.value = "";
-    renderTodos();
-    console.log(todos);
+    // renderTodos();
+    // console.log(todos);
+
+    // Thêm một form mới vào danh sách
+    var newForm = document.createElement("form");
+    newForm.innerHTML = `
+      <label for="name">Tên:${newTodo.id}</label>
+      <input type="text" name="name">
+    `;
+    formList.appendChild(newForm);
+    formList.style.display = "block";
+    console.log(11111);
   }
 }
 
-function deleteTodo(index) {
-  todos.splice(index, 1);
-  saveTodos();
-  clearAll();
-  renderTodos();
-  console.log(todos);
-}
+// function deleteTodo(index) {
+//   todos.splice(index, 1);
+//   saveTodos();
+//   clearAll();
+//   renderTodos();
+//   console.log(todos);
+// }
 
 addTaskForm.addEventListener("submit", function (event) { 
   if(taskInput.value.trim() == ""){
