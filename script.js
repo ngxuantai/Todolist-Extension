@@ -1,115 +1,178 @@
+const btnAddTask = document.getElementById("btn-add-task");
 const addTaskForm = document.getElementById("add-task-form");
-const taskInput = document.getElementById("task-input");
-const disInput = document.getElementById("discription-input");
-const taskList = document.getElementById("task-list");
-const formList = document.getElementById("form-list");
+const taskInput = document.getElementById("txt-task-input");
+const disInput = document.getElementById("txt-dis-input");
+const addBtn = document.getElementById("btn-add");
+const cancelBtn = document.getElementById("btn-cancel");
+const taskList = document.getElementById("list-task");
+const x = document.getElementById("snackbar");
 
-// let todos = [];
-// loadTodos();
+let todos = [];
 
-// function clearAll() { 
-//   while (taskList.firstChild != null) {
-//     taskList.removeChild(taskList.firstChild);
-//   }
-// }
+function closeForm() {
+  addTaskForm.style.display = "none";
+  taskInput.value = "";
+  disInput.value = "";
+}
 
-// function loadTodos() {
-//   chrome.storage.sync.get(["todos"], (result) => {
-//     if (result.todos) {
-//       todos = result.todos;
-//       renderTodos();
-//     }
-//   });
-// }
+function createTask(id, task, dis) {
+  const task_el = document.createElement('div');
+  task_el.classList.add('tasks');
+  task_el.setAttribute("data-id", id);
 
-// function renderTodos() {
-//     //const todos = JSON.parse(localStorage.getItem("todos")) || [];
+  taskList.appendChild(task_el);
 
-//     // Xóa toàn bộ task hiện tại trong taskList
-//     while (todos.firstChild != null) {
-//         todos.removeChild(todos.firstChild);
-//         chrome.storage.sync.remove("todos");
-//         console.log("remove");
-//     }
-  
-//     // Hiển thị danh sách các task
-//     todos.forEach((todo, index) => {
-//       const todoItem = document.createElement("li");
-//       todoItem.innerText = todo.text;
-//       todoItem.setAttribute("data-id", index);
-  
-//       // Thêm button để xóa task
-//       const deleteBtn = document.createElement("button");
-//       deleteBtn.innerText = "X";
-//       deleteBtn.addEventListener("click", () => {
-//         deleteTodo(index);
+  const task_content = document.createElement('div');
+  task_content.classList.add('task_content');
 
-//       });
-//       todoItem.appendChild(deleteBtn);
-  
-//       taskList.appendChild(todoItem);
-//     });
-// }
+  task_el.appendChild(task_content);
 
-function saveTodos() {
+  const task_input = document.createElement('input');
+  task_input.classList.add('txt-task');
+  task_input.type = "text";
+  task_input.value = task;
+  task_input.setAttribute("readonly", true);
+
+  task_content.appendChild(task_input);
+
+  const task_dis = document.createElement('input');
+  task_dis.classList.add('txt-dis');
+  task_dis.type = "text";
+  task_dis.value = dis;
+  task_dis.setAttribute("readonly", true);
+
+  task_content.appendChild(task_dis);
+
+  const task_action = document.createElement('div');
+  task_action.classList.add('action');
+
+  task_el.appendChild(task_action);
+
+  const task_edit = document.createElement('button');
+  task_edit.classList.add('btn-edit');
+  task_edit.innerHTML = "Edit";
+
+  task_action.appendChild(task_edit);
+
+  task_edit.addEventListener("click", () => {
+    if(task_edit.innerHTML === "Edit") {
+      task_edit.innerHTML = "Save";
+      task_input.removeAttribute("readonly");
+      task_dis.removeAttribute("readonly");
+    } else {
+      task_edit.innerHTML = "Edit";
+      task_input.setAttribute("readonly", true);
+      task_dis.setAttribute("readonly", true);
+      editTodo(id);
+    }
+  });
+
+  const task_delete = document.createElement('button');
+  task_delete.classList.add('btn-delete');
+  task_delete.innerHTML = "Delete";
+
+  task_action.appendChild(task_delete);
+
+  task_delete.addEventListener("click", () => {
+    taskList.removeChild(task_el);
+    deleteTodo(task, dis, id);
+  });
+}
+
+const editTodo = (id) => {
+  const taskInput = document.querySelector(`div[data-id="${id}"] .txt-task`);
+  const disInput = document.querySelector(`div[data-id="${id}"] .txt-dis`);
+  for (let i = 0; i < todos.length; i++) {
+    if (todos[i].date.replace(/[/:\s,]/g, '') === id) {
+      todos[i].txt_task = taskInput.value;
+      todos[i].txt_dis = disInput.value;
+    }
+  }
+  saveTask();
+};
+
+const deleteTodo = (task, dis, id) => {
+  for (let i = 0; i < todos.length; i++) {
+
+    console.log(todos[i].date.replace(/[/:\s,]/g, ''));
+    if (todos[i].date.replace(/[/:\s,]/g, '') === id) {
+      todos.splice(i, 1);
+    }
+  }
+  saveTask();
+};
+
+function loadTask() {
+  chrome.storage.sync.get(["todos"], (result) => {
+    if (result.todos) {
+      todos = result.todos;
+      todos.forEach((todo, index) => {
+        createTask(todo.date.replace(/[/:\s,]/g, ''), todo.txt_task, todo.txt_dis);
+      });
+    }
+  });
+}
+
+function formatDateToId() {
+  const datetime = new Date().toLocaleString();
+  var formattedDateTime = datetime.replace(/[/:\s,]/g, '');
+  return formattedDateTime;
+}
+
+function addTask() {
+  const newTodo = {
+    id: todos.length + 1,
+    txt_task: taskInput.value,
+    txt_dis: disInput.value,
+    done: false,
+    date: new Date().toLocaleString(),
+  };
+  todos.push(newTodo);
+  saveTask();
+  createTask(newTodo.date.replace(/[/:\s,]/g, '') ,newTodo.txt_task, newTodo.txt_dis);
+  console.log(todos);
+}
+
+function saveTask() {
   chrome.storage.sync.set({ todos: todos });
 }
 
-//format date dd/mm/yyyy
-function formatDate(date) {
-  var d = new Date(date),
-    month = "" + (d.getMonth() + 1),
-    day = "" + d.getDate(),
-    year = d.getFullYear();
+loadTask();
 
-  if (month.length < 2) month = "0" + month;
-  if (day.length < 2) day = "0" + day;
-
-  return [day, month, year].join("/");
-}
-
-function addTask(event) {
-  // event.preventDefault();
-  const taskText = taskInput.value.trim();
-  if (taskText !== "" ) {
-    const newTodo = {
-      id: todos.length + 1,
-      text: taskText,
-      completed: true,
-      date: formatDate(Date.now()),
-    };
-    todos.push(newTodo);
-    saveTodos();
-    taskInput.value = "";
-    // renderTodos();
-    // console.log(todos);
-
-    // Thêm một form mới vào danh sách
-    var newForm = document.createElement("form");
-    newForm.innerHTML = `
-      <label for="name">Tên:${newTodo.id}</label>
-      <input type="text" name="name">
-    `;
-    formList.appendChild(newForm);
-    formList.style.display = "block";
-    console.log(11111);
-  }
-}
-
-// function deleteTodo(index) {
-//   todos.splice(index, 1);
-//   saveTodos();
-//   clearAll();
-//   renderTodos();
-//   console.log(todos);
-// }
-
-addTaskForm.addEventListener("submit", function (event) { 
-  if(taskInput.value.trim() == ""){
-    event.preventDefault();
-    document.getElementById("btn-add").style.cursor = "not-allowed";
-    return;
-  }
-  addTask(event);
+// open form to add task
+btnAddTask.addEventListener("click", function (event) {
+  addTaskForm.style.display = "block";
 });
 
+// close form to add task
+cancelBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  closeForm();
+});
+
+// add task
+addBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  const task = taskInput.value;
+  const dis = disInput.value;
+  if (task === "" || dis === "") {  
+    x.innerHTML = "Please fill out all fields";
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  } else {
+    addTask();
+    closeForm();
+  }
+});
+
+taskInput.addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+  }
+});
+
+disInput.addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+  }
+});

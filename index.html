@@ -3,23 +3,55 @@
   <head>
     <title>Simple Todo List</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
   </head>
   <body>
-    <div class="header">
-      
+    <div id="header">
+      <!-- <input type="checkbox" id="check" />
+      <label for="check" class="checkbtn">
+        <i class="fas fa-bars" style="color: black;"></i>
+      </label> -->
+      <ul id="nav">
+        <li><a href="#">
+          <i class="fas fa-home"></i>
+        </a></li>
+        <li><a href="#">Search</a></li>
+        <li><a href="#">Home</a></li>
+      </ul>
     </div>
-    <div class="container">
-      <h1>Todo List</h1>
+    <div id="container">
+      <h1>Today</h1>
+      <h2>What's the plan for today?</h2>
+      <button id="btn-add-task">
+        <i class="fas fa-plus-circle"></i> Add task
+      </button>
       <form id="add-task-form">
-        <input type="text" id="task-input"  placeholder="Add a new task" autocomplete="off"/>
-        <input type="text" id="discription-input" placeholder="Add a discription"  autocomplete="off"/>
-        <div class="list-button">
-          <button type="submit" id="btn-add">Add</button>
+        <input type="text" id="txt-task-input"  placeholder="What do you have planned" autocomplete="off"/>
+        <input type="text" id="txt-dis-input" placeholder="Add some detail"  autocomplete="off"/>
+        <div id="list-btn">
+          <input type="submit" id="btn-cancel" name="btnCancel" value="Cancel">
+          <input type="submit" id="btn-add" name="btnAdd" value="Add">
         </div>
       </form>
-      <!-- <ul id="task-list"></ul> -->
-      <div id="form-list"></div>
     </div>
+    <div id="list-task">
+      <!-- <div class="tasks">
+        <div class="content">
+          <input type="text" class="txt-task" value="A new task" readonly>
+          <input type="text" class="txt-dis" value="A new task" readonly>
+        </div>
+        <div class="action">
+          <button class="btn-edit">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="btn-delete">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      </div> -->
+    </div>
+    <div id="snackbar"></div>
     <script src="script.js"></script>
   </body>
 </html>

@@ -1,128 +1,243 @@
-.container {
+:root {
+	--dark: #374151;
+	--darker: #1F2937;
+	--darkest: #111827;
+	--grey: #6B7280;
+	--pink: #EC4899;
+  --blue: #447ad1;
+	--purple: #8B5CF6;
+	--light: #EEE;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html{
+  font-family: 'Roboto', sans-serif;
   width: 400px;
   height: 800px;
-  margin: 20px auto;
-  /* text-align: center; */
-  font-family: Arial, sans-serif;
-}
-  
-h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: left;
-  padding-left: 1.5rem 0 0 0;
-  /* margin: 4,5rem 1,5rem 1,5rem 1,5rem; */
+  background: var(--dark);
   position: relative;
+  font-size: 16px;
 }
-  
-form {
-  /* display: none; */
-  /* display: flex;
-  flex-direction: column; */
-  background-color: #fff;
-  margin-top: 1rem;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  padding: 0.5rem 0.5rem;
-  border-radius: 10px;
+
+input, button {
+	appearance: none;
+	border: none;
+	outline: none;
+	background: none;
+}
+
+button {
+  color: var(--pink);
+	font-weight: 700;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	cursor: pointer;
+	transition: 0.4s;
+}
+
+input[type="text"] {
+  box-sizing: inherit;
+  margin-top: 0.2rem;
+  width: 100%;
+  background-color: var(--darker);
+  padding: 0.4rem;
+  border-radius: 0.4rem;
+  color: var(--light);
+  font-size: 1.25rem;
+}
+
+#header{
+  height: 40px;
+  background-color: var(--darker);
   position: fixed;
+  width: 100%;
+  display: flex;
+  align-content: center;
   top: 0;
+}
+
+#nav {
+  align-items: center;
+  list-style: none;
+}
+
+#nav li {
+  display: inline-block;
+  line-height: 40px;
+}
+
+#nav li a {
+  color: #fff;
+  font-size: 1rem;
+  padding: 4px 12px;
+  border-radius: 3px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+#nav li a:hover, #nav li a.active {
+  background-color: #fff;
+  color: var(--darkest);
+  transition: .5s;
+}
+
+#container {
+  padding-top: 40px;
+  margin: 0.5rem;
+}
+
+#container h1, #container h2 {
+  color: var(--light);
+  padding: 0.4rem;
+}
+
+#container h2 {
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+#container #btn-add-task {
+  background-color: #fff;
+  margin: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+#container #btn-add-task:hover {
+  background-image: linear-gradient(to right, var(--pink), var(--purple));
+}
+
+#add-task-form {
+  display: none;
+  position: fixed;
+  top: 100px;
+  z-index: 2;
+  background-color: var(--darkest);
+  box-sizing: border-box;
   left: 0.5rem;
   right: 0.5rem;
-  /* focus */
-
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-}
-  
-form label {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-form input[type="text"] {
-  margin: 0.2rem 0.2rem;
-  padding: 0.5rem;
-  font-size: 1.2rem;
-  width: 100%;
-  box-sizing: inherit;
-  /* margin-bottom: 0.5rem; */
-  
+  padding: 0.4rem;
   border: none;
-  border-radius: 5px;
-  /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); */
-  outline: none;
+  border-radius: 0.4rem;
 }
 
-form input[type="text"]:focus {
-  background-color: #CCFFCC;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-form #task-input {
-  font-weight: 500;
-}
-
-form #discription-input  {
-  font-size: 1.0rem;
-}
-
-form button[type="submit"] {
-  font-size: 1.2rem;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-  border: none;
-  border-radius: 5px;
-  background-color: #2196F3;
-  color: white;
-  float:right;
-  cursor: pointer;
-}
-
-/* form #form-list {
-  display: none;
-} */
-
-.container #form-list {
-  background-color: #fff;
-  margin-top: 1rem;
-  border: 1px solid #ccc;
-  padding: 0.5rem 0.5rem;
-  border-radius: 10px;
-  display: none;
-}
-
-ul {
-  list-style: none;
-  margin-top: 2rem;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 300px;
-}
-
-li {
-  font-size: 1.2rem;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-  border-radius: 5px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-  width: 300px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-li span {
-  margin-right: 1rem;
-}
-
-li button {
+#add-task-form #txt-dis-input {
   font-size: 1rem;
-  padding: 0.3rem;
-  border: none;
-  border-radius: 3px;
-  background-color: #f44336;
-  color: white;
-  cursor: pointer;
+  box-sizing: inherit;
+}
+
+#add-task-form input[type="submit"] {
+  /* color: var(--pink); */
+  color: #fff;
+	font-size: 1rem;
+	font-weight: 700;
+  background-color: #fff;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	cursor: pointer;
+	transition: 0.4s;
+  margin: 0.5rem;
+  padding-left: 0.4rem
+}
+
+#add-task-form input[type="submit"]:hover {
+  opacity: 0.5;
+  background-image: linear-gradient(to right, var(--pink), var(--purple));
+}
+
+#list-btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#list-task {
+  margin: 0.5rem;
+  background-color: var(--dark);
+  padding: 0.2rem ;
+  border-radius: 0.4rem;
+  box-shadow: var(--darker) 0px 0px 10px 0px;
+}
+
+.tasks {
+  margin: 0.2rem;
+  box-shadow: #333;
+}
+
+.tasks .content input[type="text"] {
+  margin-bottom: 0.2rem;
+}
+
+.tasks .action {
+  display: flex;
+  padding: 0.2rem;
+  justify-content: flex-end;
+}
+
+.tasks .action button {
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin: 0.2rem 0.4rem;
+  text-transform: uppercase;
+}
+
+.tasks .action button:hover {
+  opacity: 0.5;
+}
+
+.tasks .action .btn-edit {
+  color: var(--blue);
+  background-image: linear-gradient(to right, var(--pink), var(--purple));
+}
+
+.tasks .action .btn-delete {
+  color: crimson;
+  background-color: crimson;
+}
+
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; 
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
 }
